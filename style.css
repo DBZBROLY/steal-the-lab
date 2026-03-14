@@ -1,0 +1,294 @@
+/* ============================================
+   STEAL THE LAB — style.css
+   Theme: Industrial / Terminal / Sci-Fi
+   ============================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:         #0a0c0f;
+  --bg2:        #0f1318;
+  --bg3:        #161b22;
+  --border:     #1e2530;
+  --border2:    #2a3445;
+  --green:      #00e5a0;
+  --green-dim:  #00a870;
+  --green-glow: rgba(0,229,160,0.15);
+  --red:        #ff3e3e;
+  --red-dim:    #b02020;
+  --red-glow:   rgba(255,62,62,0.15);
+  --amber:      #f5a623;
+  --text:       #c8d6e5;
+  --text-dim:   #5a6a80;
+  --text-bright:#e8f2ff;
+  --font-mono:  'Share Tech Mono', monospace;
+  --font-head:  'Rajdhani', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ---- Atmosphere ---- */
+.scanline {
+  pointer-events: none;
+  position: fixed; inset: 0; z-index: 100;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0,0,0,0.07) 2px,
+    rgba(0,0,0,0.07) 4px
+  );
+}
+.noise {
+  pointer-events: none;
+  position: fixed; inset: 0; z-index: 99;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* ---- Header ---- */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+}
+.logo {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--green);
+  text-shadow: 0 0 18px var(--green-glow);
+}
+.version {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+
+/* ---- Layout ---- */
+main {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.panel-log { grid-column: 1 / -1; }
+
+/* ---- Panel ---- */
+.panel {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.1rem 1.2rem;
+  position: relative;
+  overflow: hidden;
+}
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.015) 0%, transparent 60%);
+  pointer-events: none;
+}
+.panel-enemy { border-color: var(--red-dim); }
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.panel-tag {
+  font-family: var(--font-head);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+}
+.enemy-tag { color: var(--red-dim); }
+
+.badge {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  padding: 2px 8px;
+  border-radius: 2px;
+  background: var(--green-glow);
+  color: var(--green);
+  border: 1px solid var(--green-dim);
+}
+.badge-red {
+  background: var(--red-glow);
+  color: var(--red);
+  border-color: var(--red-dim);
+}
+
+/* ---- Stats Grid ---- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+.stat-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.6rem 0.75rem;
+  text-align: center;
+}
+.stat-card-red { border-color: #2a1515; }
+
+.stat-num {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--green);
+  line-height: 1;
+  transition: transform 0.1s;
+}
+.stat-card-red .stat-num { color: var(--red); }
+.stat-num.pop { transform: scale(1.2); }
+
+.stat-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+/* ---- Production Bar ---- */
+.prod-bar-wrap { margin-bottom: 1rem; }
+.prod-bar-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+  margin-bottom: 5px;
+}
+.prod-bar-label span { color: var(--green); }
+.enemy-bar-label span { color: var(--red); }
+
+.prod-bar-bg {
+  height: 4px;
+  background: var(--bg3);
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.prod-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--green);
+  border-radius: 2px;
+  transition: width 0.18s linear;
+  box-shadow: 0 0 8px var(--green-glow);
+}
+.prod-bar-bg-red { border-color: #2a1515; }
+.prod-bar-fill-red {
+  background: var(--red);
+  box-shadow: 0 0 8px var(--red-glow);
+}
+
+/* ---- Buttons ---- */
+.btn {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border-radius: 4px;
+  border: 1px solid;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+.btn:active::after { opacity: 0.05; }
+
+.btn-upgrade {
+  background: var(--green-glow);
+  color: var(--green);
+  border-color: var(--green-dim);
+}
+.btn-upgrade:hover:not(:disabled) {
+  background: rgba(0,229,160,0.25);
+  box-shadow: 0 0 20px var(--green-glow);
+}
+
+.btn-steal {
+  background: var(--red-glow);
+  color: var(--red);
+  border-color: var(--red-dim);
+}
+.btn-steal:hover:not(:disabled) {
+  background: rgba(255,62,62,0.25);
+  box-shadow: 0 0 20px var(--red-glow);
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.btn-icon { font-size: 1em; }
+.btn-cost {
+  font-size: 0.65em;
+  opacity: 0.7;
+  margin-left: 2px;
+}
+
+/* ---- Log ---- */
+.panel-log { background: var(--bg); }
+.log-box {
+  height: 130px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
+}
+.log-entry {
+  font-size: 0.72rem;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+  animation: fadeIn 0.3s ease;
+}
+.log-info    { color: var(--text-dim); }
+.log-success { color: var(--green); }
+.log-steal   { color: var(--amber); }
+.log-fail    { color: var(--red-dim); }
+.log-upgrade { color: #7da8ff; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+/* ---- Responsive ---- */
+@media (max-width: 520px) {
+  main { grid-template-columns: 1fr; }
+  .panel-log { grid-column: 1; }
+  .stat-num { font-size: 1.3rem; }
+}

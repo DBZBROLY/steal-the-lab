@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steal the Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scanline"></div>
+<div class="noise"></div>
+
+<header>
+  <div class="logo">⚗️ STEAL THE LAB</div>
+  <div class="version">v2.0</div>
+</header>
+
+<main>
+
+  <!-- MY LAB -->
+  <section class="panel" id="my-lab">
+    <div class="panel-header">
+      <span class="panel-tag">YOUR LAB</span>
+      <span class="badge" id="level-badge">LVL 1</span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num" id="items">0</div>
+        <div class="stat-label">ITEMS</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="level">1</div>
+        <div class="stat-label">LEVEL</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="per-tick">1</div>
+        <div class="stat-label">PER SEC</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="total-stolen">0</div>
+        <div class="stat-label">STOLEN</div>
+      </div>
+    </div>
+
+    <div class="prod-bar-wrap">
+      <div class="prod-bar-label">PRODUCING <span id="prod-pct">0%</span></div>
+      <div class="prod-bar-bg">
+        <div class="prod-bar-fill" id="prod-bar"></div>
+      </div>
+    </div>
+
+    <button class="btn btn-upgrade" id="upg-btn" onclick="upgrade()">
+      <span class="btn-icon">⚙</span>
+      UPGRADE LAB
+      <span class="btn-cost" id="upg-cost">[10 items]</span>
+    </button>
+  </section>
+
+  <!-- ENEMY LAB -->
+  <section class="panel panel-enemy" id="enemy-lab">
+    <div class="panel-header">
+      <span class="panel-tag enemy-tag">ENEMY LAB</span>
+      <span class="badge badge-red" id="enemy-status">ACTIVE</span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card stat-card-red">
+        <div class="stat-num" id="enemyItems">20</div>
+        <div class="stat-label">ITEMS</div>
+      </div>
+      <div class="stat-card stat-card-red">
+        <div class="stat-num" id="enemy-level">1</div>
+        <div class="stat-label">LEVEL</div>
+      </div>
+      <div class="stat-card stat-card-red">
+        <div class="stat-num" id="enemy-defense">0</div>
+        <div class="stat-label">DEFENSE</div>
+      </div>
+      <div class="stat-card stat-card-red">
+        <div class="stat-num" id="times-stolen">0</div>
+        <div class="stat-label">RAIDS</div>
+      </div>
+    </div>
+
+    <div class="prod-bar-wrap">
+      <div class="prod-bar-label enemy-bar-label">REBUILDING <span id="enemy-prod-pct">0%</span></div>
+      <div class="prod-bar-bg prod-bar-bg-red">
+        <div class="prod-bar-fill prod-bar-fill-red" id="enemy-prod-bar"></div>
+      </div>
+    </div>
+
+    <button class="btn btn-steal" id="steal-btn" onclick="steal()">
+      <span class="btn-icon">🕵</span>
+      STEAL ITEMS
+      <span class="btn-cost">[success ~70%]</span>
+    </button>
+  </section>
+
+  <!-- LOG -->
+  <section class="panel panel-log">
+    <div class="panel-header">
+      <span class="panel-tag">ACTIVITY LOG</span>
+    </div>
+    <div class="log-box" id="log-box">
+      <div class="log-entry log-info">▶ Lab initialized. Start producing items.</div>
+    </div>
+  </section>
+
+</main>
+
+<script src="game.js"></script>
+</body>
+</html>
